@@ -65,8 +65,14 @@ def main(host, ports, timeout):
     for x in thread_list:
         x.join()
     
+    print("\tOpen ports:")
     for x in port_list:
-        print(f"Port open: {x}")
+        try:
+            serv_name = socket.getservbyport(x)
+        except:
+            serv_name = "<unknown>"
+            
+        print(f"\t\t{serv_name}:{x}")
 
 if __name__ == "__main__":
     main()
